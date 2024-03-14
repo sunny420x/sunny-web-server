@@ -1,14 +1,13 @@
 var root = document.getElementById("root")
 
-function getURL() {
-    return window.location.href.split("/");
-}
-
 function getPath() {
+    function getURL() {
+        return window.location.href.split("/");
+    }    
     return getURL()[3]
 }
 
-function getPage(path) {
+function getFile(path) {
     return new Promise((resolve) => {
         fetch("http://localhost:8080/"+path).then(res => res.text())
         .then((data) => {
@@ -20,17 +19,25 @@ function getPage(path) {
 async function displayPage() {
     switch(getPath()){
         case "about":
-            page = getPage('pages/about');
+            page = getFile('pages/about.html');
             break
         default:
-            page = getPage('pages/home');
+            page = getFile('pages/home.html');
             break
     }
     return page
 }
 
 async function RedirectPage(path) {
-    return getPage('pages/'+path);
+    return getFile('pages/'+path+".html");
+}
+
+function getAPIData(path) {
+    return new Promise((resolve) => {
+        fetch(path).then(res => res.text()).then((data) => {
+            resolve(data)
+        })
+    })
 }
 
 function Redirect(path) {

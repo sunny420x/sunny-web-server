@@ -15,10 +15,10 @@ http.createServer((req, res) => {
         case "/":
             new View('index.html', res).render()
             break
-        case "/pages/home":
-            send_file('pages/home.html', res)
+        case "/pages/home.html":
+            render_page('pages/home.html', res)
             break
-        case "/pages/about":
+        case "/pages/about.html":
             send_file('pages/about.html', res)
             break
         case "/api":
