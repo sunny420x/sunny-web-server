@@ -1,18 +1,33 @@
+//Importing Required Node.js Modules.
 var fs = require('fs')
 
-display_log(`---------------------------------------------`)
-display_log(`[+] Sunny Web Server is started at :${port}`)
-display_log(`... Log file will be saved at ${log_file} ...`)
-display_log(`---------------------------------------------`)
+//Display Welcome Message.
+if(show_welcome_message == true) {
+    console.log(`---------------------------------------------`)
+    console.log(`[+] ${server_name} has been started at :${port}`)
+
+    //Check Logging Status
+    if(enable_log == true) {
+        console.log(`... [+] Logging is enabled ...`)
+        console.log(`... Log file will be saved at ${log_file} ...`)
+    } else {
+        console.log(`... [-] Logging is disabled ...`)
+    }
+
+    console.log(`---------------------------------------------`)
+}
 
 function display_log(text) {
     store_text = `[ ${getDate()} ${getTime()} ] ${text}`
     console.log(store_text);
-    fs.appendFile('log.txt', store_text+"\n", (err) => {
-        if (err) throw err;
-    });
+    if(enable_log == true) {
+        fs.appendFile('log.txt', store_text+"\n", (err) => {
+            if (err) throw err;
+        });
+    }
 }
 
+//File response.
 function send_file(path, res) {
     fs.readFile(path, (err, data) => {
         if(err) throw err;
@@ -22,6 +37,7 @@ function send_file(path, res) {
     })
 }
 
+//HTML response.
 class View {
     constructor(path, res) {
         this.path = path
@@ -37,6 +53,7 @@ class View {
     }
 }
 
+//JSON response.
 class JSON_API {
     constructor(data, res) {
         this.res = res
@@ -49,6 +66,7 @@ class JSON_API {
     }
 }
 
+//Time
 function getDate() {
     return new Date().toISOString().slice(0,10)
 }
@@ -57,6 +75,7 @@ function getTime() {
     return new Date().toLocaleString('en-GB', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }).slice(12,20)
 }
 
+//Exporting Functions.
 module.exports = {
     display_log: display_log,
     View:View,

@@ -2,8 +2,11 @@ const http = require('http')
 var url = require('url')
 
 // Setting
+server_name = "Sunny Framework"
 port = 8080
+enable_log = false 
 log_file = './log.txt'
+show_welcome_message = true
 
 // Importing module.
 var { send_file, View, JSON_API, getDate, getTime } = require('./modules/sunnyfw-backend.js')
