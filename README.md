@@ -1,4 +1,7 @@
-<h1>Sunny Web Server powered by Node.js</h1>
+<h1>What is Sunny Framework?</h1>
 <p>
-Sunny Web Server can served an html file and JSON responses as a Back-end Server.
+Sunny Framework is a Simple Single-Page Web Framework written in JavaScript.
+</p>
+<p>
+Sunny Framework act as a Back-end Server that serves html responses, JSON responses. And itself has a integated Front-end system inside.
 </p>
