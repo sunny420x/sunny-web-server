@@ -1,3 +1,4 @@
+// Importing module.
 const http = require('http')
 var url = require('url')
 
@@ -8,8 +9,7 @@ enable_log = false
 log_file = './log.txt'
 show_welcome_message = true
 
-// Importing module.
-var { send_file, View, JSON_API, getDate, getTime } = require('./modules/sunnyfw-backend.js')
+var { send_file, View, JSON_API, Time } = require('./modules/sunnyfw-backend.js')
 
 //Routing
 http.createServer((req, res) => {
@@ -18,28 +18,35 @@ http.createServer((req, res) => {
         case "/":
             new View('index.html', res).render()
             break
+
         case "/pages/home.html":
             send_file('pages/home.html', res)
             break
+
         case "/pages/about.html":
             send_file('pages/about.html', res)
             break
+            
         case "/api":
             new JSON_API({
-                date: getDate(),
-                time: getTime(),
+                date: Time.date(),
+                time: Time.time(),
                 message: "Welcome to test API."
             }, res).send()
             break
+
         case "/pages/404.html":
             send_file('pages/404.html', res)
             break
+
         case "/js/sunnyfw-frontend.js":
             send_file('js/sunnyfw-frontend.js', res)
             break
+
         case "/app.js":
             send_file('app.js', res)
             break
+
         default:
             new View('index.html', res).render()
             break

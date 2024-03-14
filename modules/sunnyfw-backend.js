@@ -66,13 +66,13 @@ class JSON_API {
     }
 }
 
-//Time
-function getDate() {
-    return new Date().toISOString().slice(0,10)
-}
-
-function getTime() {
-    return new Date().toLocaleString('en-GB', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }).slice(12,20)
+class Time {
+    static date() {
+        return new Date().toISOString().slice(0,10)
+    }
+    static time() {
+        return new Date().toLocaleString('en-GB', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }).slice(12,20)
+    }
 }
 
 //Exporting Functions.
@@ -80,7 +80,6 @@ module.exports = {
     display_log: display_log,
     View:View,
     JSON_API:JSON_API,
-    getDate:getDate,
-    getTime:getTime,
+    Time:Time,
     send_file: send_file
 }
