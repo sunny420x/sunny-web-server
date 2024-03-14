@@ -14,15 +14,6 @@ function display_log(text) {
     });
 }
 
-function render_page(path, res) {
-    fs.readFile(path, (err, data) => {
-        if(err) throw err;
-        res.writeHead(200, {'Content-Type': 'text/html'})
-        res.write(data)
-        return res.end()
-    })
-}
-
 function send_file(path, res) {
     fs.readFile(path, (err, data) => {
         if(err) throw err;
@@ -69,7 +60,6 @@ function getTime() {
 
 module.exports = {
     display_log: display_log,
-    render_page: render_page,
     View:View,
     JSON_API:JSON_API,
     getDate:getDate,

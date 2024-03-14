@@ -18,11 +18,17 @@ function getFile(path) {
 
 async function displayPage() {
     switch(getPath()){
+        case "":
+            page = getFile('pages/home.html');
+            break
+        case "home":
+            page = getFile('pages/home.html');
+            break
         case "about":
             page = getFile('pages/about.html');
             break
         default:
-            page = getFile('pages/home.html');
+            page = getFile('pages/404.html');
             break
     }
     return page
