@@ -1,4 +1,5 @@
 var fs = require('fs')
+const { send } = require('process')
 
 display_log(`---------------------------------------------`)
 display_log(`[+] Sunny Web Server is started at :${port}`)
@@ -17,6 +18,15 @@ function render_page(path, res) {
     fs.readFile(path, (err, data) => {
         if(err) throw err;
         res.writeHead(200, {'Content-Type': 'text/html'})
+        res.write(data)
+        return res.end()
+    })
+}
+
+function send_file(path, res) {
+    fs.readFile(path, (err, data) => {
+        if(err) throw err;
+        res.writeHead(200)
         res.write(data)
         return res.end()
     })
@@ -63,5 +73,6 @@ module.exports = {
     View:View,
     JSON_API:JSON_API,
     getDate:getDate,
-    getTime:getTime
+    getTime:getTime,
+    send_file: send_file
 }

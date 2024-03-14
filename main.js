@@ -6,7 +6,7 @@ port = 8080
 log_file = './log.txt'
 
 // Importing module.
-var { render_page, View, JSON_API, getDate, getTime } = require('./modules/sunny_webserver.js')
+var { render_page, send_file, View, JSON_API, getDate, getTime } = require('./modules/sunnyfw-backend.js')
 
 //Routing
 http.createServer((req, res) => {
@@ -15,8 +15,11 @@ http.createServer((req, res) => {
         case "/":
             new View('index.html', res).render()
             break
-        case "/about":
-            new View('about.html', res).render()
+        case "/pages/home":
+            send_file('pages/home.html', res)
+            break
+        case "/pages/about":
+            send_file('pages/about.html', res)
             break
         case "/api":
             new JSON_API({
@@ -25,8 +28,11 @@ http.createServer((req, res) => {
                 message: "Welcome to test API."
             }, res).send()
             break
+        case "/js/sunnyfw-frontend.js":
+            send_file('js/sunnyfw-frontend.js', res)
+            break
         default:
-            render_page('404.html', res)
+            new View('index.html', res).render()
             break
     }
 
