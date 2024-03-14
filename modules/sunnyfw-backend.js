@@ -1,5 +1,4 @@
 var fs = require('fs')
-const { send } = require('process')
 
 display_log(`---------------------------------------------`)
 display_log(`[+] Sunny Web Server is started at :${port}`)

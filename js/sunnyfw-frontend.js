@@ -9,7 +9,7 @@ function getPath() {
 
 function getFile(path) {
     return new Promise((resolve) => {
-        fetch("http://localhost:8080/"+path).then(res => res.text())
+        fetch(path).then(res => res.text())
         .then((data) => {
             resolve(data)
         })
@@ -34,19 +34,10 @@ async function displayPage() {
     return page
 }
 
-async function RedirectPage(path) {
-    return getFile('pages/'+path+".html");
-}
-
-function getAPIData(path) {
-    return new Promise((resolve) => {
-        fetch(path).then(res => res.text()).then((data) => {
-            resolve(data)
-        })
-    })
-}
-
 function Redirect(path) {
+    async function RedirectPage(path) {
+        return getFile('pages/'+path+".html");
+    }
     RedirectPage(path).then((new_page) => {
         root.innerHTML = new_page
         window.history.pushState('', 'Title', '/'+path);
