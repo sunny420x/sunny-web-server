@@ -47,10 +47,6 @@ http.createServer((req, res) => {
             send_file('js/routing.js', res)
             break
 
-        case "/app.js":
-            send_file('app.js', res)
-            break
-
         default:
             new View('index.html', res).render()
             break
