@@ -1,42 +1,33 @@
-var root = document.getElementById("root")
-
-function getPath() {
-    function getURL() {
-        return window.location.href.split("/");
-    }    
-    return getURL()[3]
-}
-
-function getFile(path) {
-    return new Promise((resolve) => {
-        fetch(path).then(res => res.text())
-        .then((data) => {
-            resolve(data)
-        })
-    })
-}
-
-async function displayPage() {
-    switch(getPath()){
-        case "":
-            page = getFile('pages/home.html');
-            break
-        case "home":
-            page = getFile('pages/home.html');
-            break
-        case "about":
-            page = getFile('pages/about.html');
-            break
-        default:
-            page = getFile('pages/404.html');
-            break
+'use strict';
+class page {
+    getPath() {
+        function getURL() {
+            return window.location.href.split("/");
+        }    
+        return getURL()[3]
     }
-    return page
+    
+    getFile(path) {
+        return new Promise((resolve) => {
+            fetch(path).then(res => res.text())
+            .then((data) => {
+                resolve(data)
+            })
+        })
+    }
+    
+    render(path, file) {
+        return new Promise((resolve) => {
+            if(this.getPath() == path) {
+                resolve(this.getFile(file))
+            }
+        })
+    }
 }
 
 function Redirect(path) {
     async function RedirectPage(path) {
-        return getFile('pages/'+path+".html");
+        return page.getFile('pages/'+path+".html");
     }
     RedirectPage(path).then((new_page) => {
         root.innerHTML = new_page
@@ -44,6 +35,4 @@ function Redirect(path) {
     })
 }
 
-displayPage().then((page) => {
-    root.innerHTML = page
-})
+page = new page

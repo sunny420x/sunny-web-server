@@ -4,7 +4,7 @@ var fs = require('fs')
 //Display Welcome Message.
 if(show_welcome_message == true) {
     console.log(`---------------------------------------------`)
-    console.log(`[+] ${server_name} has been started at :${port}`)
+    console.log(`[+] ${server_name} has been started at http://localhost:${port}`)
 
     //Check Logging Status
     if(enable_log == true) {

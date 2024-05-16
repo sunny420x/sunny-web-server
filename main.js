@@ -4,7 +4,7 @@ var url = require('url')
 
 // Setting
 server_name = "Sunny Framework"
-port = 8080
+port = 4444
 enable_log = false 
 log_file = './log.txt'
 show_welcome_message = true
@@ -41,6 +41,10 @@ http.createServer((req, res) => {
 
         case "/js/sunnyfw-frontend.js":
             send_file('js/sunnyfw-frontend.js', res)
+            break
+
+        case "/js/routing.js":
+            send_file('js/routing.js', res)
             break
 
         case "/app.js":
